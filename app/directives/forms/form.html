@@ -1,0 +1,11 @@
+<div class='form-horizontal'>
+    <div class='form-group' ng-class ="{'col-md-12': !config.widthClass, '{{config.widthClass}}' : !!config.widthClass}" ng-repeat='config in formCtrl.config track by $index' >
+            <label class='control-label'>{{config.label}}</label>
+            <div>
+                <input type='{{config.type}}' name='{{config.fieldName}}' ng-model='formCtrl.model[config.fieldName]' placeholder='{{config.label}}'
+                    class='form-control' />
+
+            </div>
+        </div>
+    </div>
+</div>

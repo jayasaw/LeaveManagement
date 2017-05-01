@@ -1,0 +1,13 @@
+git config --global user.name "jayasaw"
+git config --global user.email "jayasaw@gmail.com"
+
+// to initialize the repository 
+
+git init 
+
+// to update the folder path with new repository
+git remote add upstream https://github.com/jayasaw/LeaveManagement.git
+git remote add origin https://github.com/jayasaw/LeaveManagement.git
+//The current branch master has no upstream branch.
+//To push the current branch and set the remote as upstream, use
+git push --set-upstream master master
