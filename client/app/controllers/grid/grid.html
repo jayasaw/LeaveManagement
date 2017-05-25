@@ -1,16 +1,23 @@
-<div class="col-md-10">
+<div class="col-md-12">
       <!--// <p>I am grid</p>-->
       <div style="margin-bottom:20px;">
             <a class='btn btn-primary' ui-sref="leave">Apply New Leave</a>
+            <a class='btn btn-primary' ng-click="gridCtrl.approveLeaveList()" ng-if="gridCtrl.user.isManager">Approve Leaves</a>
+             <a class='btn btn-primary' ng-click="gridCtrl.hide = false" ng-if="gridCtrl.user.isManager">My Leaves</a>
       </div>
-      <my-grid config="gridCtrl.column" rows='gridCtrl.rows' on-delete="gridCtrl.onDelete(row)" on-Edit="gridCtrl.onEdit(row)"
-            on-Save="gridCtrl.onSave(row)" back='gridCtrl.back()'></my-grid>
+
+      <div ng-if="!gridCtrl.hide">
+            <my-grid config="gridCtrl.column" rows='gridCtrl.rows' on-action = 'gridCtrl.onAction(action, row)' message="No leave is applied by you as if now."></my-grid>
+      </div>
+      <div ng-if="gridCtrl.hide && gridCtrl.user.isManager">
+            <my-grid config="gridCtrl.approveLeavesColumn" rows='gridCtrl.appliedLeaves' on-action = 'gridCtrl.onAction(action, row)'  message="No leaves to approve."></my-grid>
+      </div>
 </div>
 
 
-<jaya>
+<!--<jaya>
       <div>I live in Pune city</div>
       <div>I live in Pune city</div>
       <div>I live in Pune city</div>
       <div>I live in Pune city</div>
-      </jaya>
+      </jaya>-->

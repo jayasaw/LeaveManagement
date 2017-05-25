@@ -1,4 +1,7 @@
 <div class='form-horizontal'>
+    <div class="alert alert-danger" ng-if = '!!formCtrl.error'>
+        <strong>Error!</strong> {{formCtrl.error}}
+    </div>
     <div class='form-group' ng-class="{'col-md-12': !config.widthClass, '{{config.widthClass}}' : !!config.widthClass}" ng-repeat='config in formCtrl.config track by $index'>
         <div ng-if='config.type != "select" && config.type != "checkbox" && config.type != "textarea"'>
             <label class='control-label'>{{config.label}}</label>
@@ -12,7 +15,7 @@
         <div ng-if='config.type == "select"'>
             <label class='control-label'>{{config.label}}</label>
             <div>
-                <select ng-model='address.test' class="form-control" ng-disabled='config.disabled' ng-options='option.code as option.description for option in config.options'></select>
+                <select ng-model='formCtrl.model[config.fieldName]' class="form-control" ng-disabled='config.disabled' ng-options='option.code as option.description for option in config.options'></select>
             </div>
         </div>
         <div>
@@ -24,11 +27,11 @@
                 </div>
 
             </div>
-            <div ng-if = 'config.type == "textarea"'>
-                  <label class='control-label'>{{config.label}}</label>
-            <div>
-            <textarea class="form-control" name='{{config.fieldName}}' ng-model='formCtrl.model[config.fieldName]' rows = '{{config.row}}'  ></textarea>
-            <div>
-        </div>
-    </div>
-</div>
+            <div ng-if='config.type == "textarea"'>
+                <label class='control-label'>{{config.label}}</label>
+                <div>
+                    <textarea class="form-control" name='{{config.fieldName}}' ng-model='formCtrl.model[config.fieldName]' rows='{{config.row}}'></textarea>
+                    <div>
+                    </div>
+                </div>
+            </div>

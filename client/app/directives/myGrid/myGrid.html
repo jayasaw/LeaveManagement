@@ -2,13 +2,20 @@
     <tr>
         <th ng-repeat='config in grid.config track by $index'>{{config.displayName}}</th>
     </tr>
-    <tr ng-repeat="row in grid.rows">
+    <tr ng-if="!grid.rows.length">
+        <td colspan='{{grid.config.length}}'>
+            <p>{{grid.message}}</p>
+        </td>
+    </tr>
+    <tr ng-repeat="row in grid.rows" ng-if="grid.rows.length">
         <td ng-repeat="config in grid.config  track by $index">
             <span ng-if='config.fieldName !== "actionBtn"'>   {{row[config.fieldName]}} </span>
             <span ng-if='config.fieldName === "actionBtn"'>
-            <a ng-click='grid.onDelete({row:row})' href='' ng-if="!!config.delete" > <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>{{config.delete}}</a>
-            <a ng-click='grid.edit({row:row})' href='' ng-if="!!config.edit"> <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>{{config.edit}}</a>
-            <a ng-click ='grid.onSave({row:row})' href ='' > {{config.save}}</a>
+            
+            <a ng-click='grid.onAction({action:action.button, row:row})' ng-class = 'action.class'
+            ng-repeat="action in config.action  track by $index"  href='' >
+            <span class="glyphicon" ng-class='action.icon' aria-hidden="true"></span>
+            {{action.button}}</a>
             
             </span>
         </td>
@@ -16,5 +23,3 @@
    
 </table>
  <button ng-click= 'grid.back()' type = 'submit' class ='btn btn-primary pull-right'>back</button>
- <button ng-click= 'grid.updateOneData()' type = 'submit' class ='btn btn-primary pull-right'>update</button>
-  <button ng-click= 'grid.update()' type = 'submit' class ='btn btn-primary pull-right'>update</button>

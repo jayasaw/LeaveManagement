@@ -11,11 +11,7 @@ function dataServices($q, $http) {
     this.remove = remove;
     this.get = get;
     this.put = put;
-
-
-    // this is to save the data;
-
-
+// this is to save the data;
 
     function post(url, data, params) {
         var defered = $q.defer()
@@ -24,7 +20,7 @@ function dataServices($q, $http) {
             method: 'Post',
             data: JSON.stringify(data)
         }).then(function (response) {
-            defered.resolve(response)
+            defered.resolve(response.data)
         }, function error(error) {
             defered.reject(error)
         })
@@ -67,7 +63,7 @@ function dataServices($q, $http) {
 
     }
 
-    function put(url, data, id) {
+    function put(url, id, data) {
         var defered = $q.defer();
         $http({
             url: 'api/' + url + '/' + id,

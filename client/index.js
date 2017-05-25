@@ -26,9 +26,14 @@ leaveApp.provider('jaya', function () {
 //         angular.bootstrap(document, ['leaveApp']);
 //     }
 // )
-leaveApp.controller('mainCtrl', function () {
+leaveApp.controller('mainCtrl', function (userSession, $state, $rootScope) {
     var vm = this;
+    vm.user = $rootScope.user;
 
+    vm.logout = function () {
+        userSession.logout();
+        $state.go('login');
+    }
 
 })
     .config(function ($stateProvider, $urlRouterProvider, jayaProvider) {
@@ -48,13 +53,46 @@ leaveApp.controller('mainCtrl', function () {
                 templateUrl: "app/controllers/leave/leave.html",
                 controller: 'leaveCtrl',
                 controllerAs: 'leaveCtrl',
-                params: { data: null }
+                params: { data: null },
+                resolve: {
+                    managerList: function (dataServices, user, $state) {
+                        if (!user) {
+                            $state.go('login')
+                        } else {
+                            return dataServices.get('manager')
+                        }
+
+                    },
+                    user: function (userSession) {
+                        return userSession.getUserDetails();
+                    }
+                }
             })
             .state('grid', {
                 url: '/grid',
                 templateUrl: "app/controllers/grid/grid.html",
                 controller: 'gridCtrl',
-                controllerAs: 'gridCtrl'
+                controllerAs: 'gridCtrl',
+                resolve: {
+                    gridData: function (dataServices, user, $state) {
+                        if (!user) {
+                            $state.go('login');
+                        } else {
+                          return dataServices.get('grid', null, { empId: user.empId }).then(function (response) {
+                                return response;
+                            }).catch(function (error) {
+                                console.error(error)
+                                return [];
+                            });
+                        }
+
+
+
+                    },
+                    user: function (userSession) {
+                        return userSession.getUserDetails();
+                    }
+                }
             })
 
             .state('login', {
@@ -74,10 +112,6 @@ leaveApp.controller('mainCtrl', function () {
     });
 
 
-// leaveApp.controller('mainCtrl', function () {
-//     var vm = this;
 
-
-// });
 
 

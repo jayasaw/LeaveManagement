@@ -2,7 +2,6 @@
 var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
-
 function empSchema() {
 
     var Schema, employee
@@ -14,24 +13,10 @@ function empSchema() {
         emailId: String,
         password: String,
         isEmployee: Boolean,
-        isManager: Boolean
+        isManager: Boolean,
+        empId: Number
     }
-
-    var empSchema = new Schema(employee);
-    var Employee
-    //db.users.find()
-    if (!mongoose.models.user) {
-        Employee = mongoose.model('user', empSchema);
-    } else {
-        Employee = mongoose.model('user');
-    }
-    //var Employee = mongoose.model('user', empSchema);
-
-    // db.tests.find();
-    // var User = mongoose.model('test', empSchema);
-
-
-    return Employee;
+    var empschema = new Schema(employee);
+    return mongoose.model('employee', empschema);
 }
-
-module.exports = empSchema;
+module.exports = empSchema();

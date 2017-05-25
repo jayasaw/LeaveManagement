@@ -3,16 +3,12 @@ var router = express.Router();
 
 var reg = require('./employee/register.js');
 var log = require('./employee/login.js');
-var leaveApp = require('./leave/leave.js')
-//reg = {post:function post{...}}
-//router.route
-//router.use
-//router.get
-//router.post
-//router.put
-//router.delete
-router.use(function (req, res, next) {
+var manager = require('./employee/manager.js');
+var employee = require('./employee/employee.js');
+var leave = require('./leave/leave.js');
+var grid = require('./leave/grid.js');
 
+router.use(function (req, res, next) {
     console.log('I am here');
     next()
 })
@@ -20,23 +16,31 @@ router.use(function (req, res, next) {
 router.route('/login')
     .post(log.verifyUser)
 
+router.route('/employee')
+    .get(employee.fetch)
+
+router.route('/manager')
+    .get(manager.fetch)
 
 router.route('/register')
     .post(reg.post)
-    .get(reg.get)
 
-    router.route('/leave')
-        .post(leaveApp.post)
+router.route('/leave')
+    .post(leave.saveLeave)
 
+router.route('/grid')
+    .get(grid.fetchGrid)
 
-function test(req, res, next) {
-    res.end(' I am here ' + req.method);
-}
-
+router.route('/grid/:id')
+    .put(grid.updateLeaveStatus)
+    
 router.use(function (req, res, next) {
-    res.end('route does not match');
+    res.json({ error: 'route doed not match' });
 })
-
+// this will run if there is any error
+router.use(function (err, req, res, next) {
+    res.json({ error: err.message });
+})
 module.exports = router;
 
 

@@ -4,12 +4,12 @@
         <div class='panel panel-default'>
             <div class='panel-heading'>Registartion Form</div>
             <div class='panel-body'>
-                <my-form config='registerCtrl.registrationPage' model='registerCtrl.model'></my-form>
+                <my-form config='registerCtrl.registrationPage' model='registerCtrl.model' error='registerCtrl.err'></my-form>
              
                 <div class='form-group'>
                     <div class="pull-right">
                         <button type='button' class='btn btn-primary' ng-click="registerCtrl.apply()">register</button>
-                        <button type='button' class='btn btn-danger '>cancel</button>
+                        <button type='button' class='btn btn-danger ' ng-click = 'registerCtrl.cancel()'>cancel</button>
                         
                     </div>
                 </div>

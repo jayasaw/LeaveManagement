@@ -16,6 +16,7 @@
         .x-ng-cloak {
             display: none !important;
         }
+        
         [ng-cloak] {
             display: none !important;
         }
@@ -31,20 +32,27 @@
                 <div class='navbar-header'>
                     <a href="# " class="navbar-brand ">Leave Application</a>
                 </div>
-                <div class="navbar-form navbar-left ">
-                    <div class='form-group'>
-                        <input type='text' ng-model="ctrl.search" class='form-control' placeholder="search" <span class="glyphicon glyphicon-search pull- right"
-                            aria-hidden="true"></span>
+                <div class="navbar-form navbar-right " style="margin-right:50px;">
+                    <div class='form-group' ng-if="!user" >
 
-                        <div class="nav navbar-nav navbar-right ">
-                            <li><a href="#">Apply Leave</a></li>
-                        </div>
-                               <div class="nav navbar-nav navbar-right ">
-                            <li><a href="" ui-sref="login">Login Page</a></li>
+                        <div class="nav navbar-nav">
+                            <li><a href="" ui-sref="login">Login</a></li>
                         </div>
 
-                         <div class="nav navbar-nav navbar-right ">
-                            <li><a href="" ui-sref="register">Register Page</a></li>
+                        <div class="nav navbar-nav">
+                            <li><a href="" ui-sref="register">Register</a></li>
+                        </div>
+
+                    </div>
+
+                    <div class='form-group' ng-if="user">
+
+                        <div class="nav navbar-nav">
+                            <li><a href="" ui-sref="grid">{{user.fullName}}</a></li>
+                        </div>
+
+                        <div class="nav navbar-nav">
+                            <li><a href="" ng-click="ctrl.logout()">Logout</a></li>
                         </div>
 
                     </div>
@@ -57,12 +65,6 @@
     </div>
 
 
-  <!--<select>
-      <option value = "">please select</option>
-      <option> name1 </option>
-      <option> name2 </option>
-      <select>-->
-
     <!-- libraries  -->
     <script src="./bower_components/angular/angular.js "></script>
     <script src="./bower_components/jquery/dist/jquery.js "></script>
@@ -72,23 +74,23 @@
     <script src="index.js"></script>
 
     <!--directives -->
-    <script src = "./app/directives/forms/form.js"></script>
-    <script src = "./app/directives/myGrid/myGrid.js"></script>
-     <script src = "./app/directives/common/filterDate.js"></script>
-     <!--<script src = "./app/directives/loginPage/login.js"></script>-->
-
+    <script src="./app/directives/forms/form.js"></script>
+    <script src="./app/directives/myGrid/myGrid.js"></script>
+    <script src="./app/directives/common/filterDate.js"></script>
     <!--filter -->
-   
-    <!-- service -->
 
-    <script src = './app/services/dataServices.js'></script>
-    <script src = './app/services/formConfigService.js'></script>
+    <!-- service -->
+    <script src='./app/services/dataServices.js'></script>
+    <script src='./app/services/formConfigService.js'></script>
+    <script src='./app/services/userSession.js'></script>
+     <script src='./app/services/optionsData.js'></script>
+
     <!-- controller -->
     <script src="app/controllers/home/homeCtrl.js"></script>
     <script src="app/controllers/leave/leaveCtrl.js"></script>
-    <script src = 'app/controllers/grid/gridCtrl.js'></script>
-    <script src = "./app/controllers/login/loginCtrl.js"></script>
-    <script src = "./app/controllers/registration/registerCtrl.js"></script>
+    <script src='app/controllers/grid/gridCtrl.js'></script>
+    <script src="./app/controllers/login/loginCtrl.js"></script>
+    <script src="./app/controllers/registration/registerCtrl.js"></script>
 
 
 

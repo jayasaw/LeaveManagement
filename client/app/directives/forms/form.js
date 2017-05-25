@@ -17,7 +17,8 @@ leaveApp.directive('myForm', function () {
         bindToController: true,
         scope: {
             config: '=',
-            model: '='
+            model: '=',
+            error: '='
         },
         link: function (scope) {
             console.log(scope);

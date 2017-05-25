@@ -1,13 +1,12 @@
 var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
-
 var mongoose = require('mongoose');
+
+//custom modules
 var routeToApi =  require('./serverApp/route.js');
 
-mongoose.connect('mongodb://localhost:27017/test');
-//custom api
-var app = express(); // its create the server
+mongoose.connect('mongodb://127.0.0.1/test');
 
 
 
@@ -18,12 +17,13 @@ db.once('open', function() {
   console.log('we are connected');
 });
 
+var app = express(); // its create the server
 
 // parse the request body object
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-
+// serve static files
 app.use('/', express.static(path.resolve("client")))
 
 app.get('/', function (req, res, next) {  
@@ -31,6 +31,7 @@ app.get('/', function (req, res, next) {
 });
 
 
+//custom api
 app.use('/api', routeToApi);
 
 
