@@ -1,0 +1,14 @@
+//mongod --port 27017 --dbpath D:\mongodb\db
+
+
+open cmd terminal and go to this 
+ cd C:\Program Files\MongoDB\Server\3.4\bin
+
+type  mongod and hit enter
+ //mongod
+
+ cd C:\Program Files\MongoDB\Server\3.4\bin
+ mongo
+
+ db.users.find()
+ this will show all the added recoed for user

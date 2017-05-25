@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="./bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet"></link>
+    <link href="style.css" rel="stylesheet">
+    <style>
+        [ng\:cloak],
+        [ng-cloak],
+        [data-ng-cloak],
+        [x-ng-cloak],
+        .ng-cloak,
+        .x-ng-cloak {
+            display: none !important;
+        }
+        [ng-cloak] {
+            display: none !important;
+        }
+    </style>
+</head>
+
+<body ng-app="leaveApp" ng-controller="mainCtrl as ctrl" ng-cloak>
+
+    <!-- header starts from here -->
+    <header>
+        <nav class="navbar navbar-default">
+            <div class=" containe-fluid ">
+                <div class='navbar-header'>
+                    <a href="# " class="navbar-brand ">Leave Application</a>
+                </div>
+                <div class="navbar-form navbar-left ">
+                    <div class='form-group'>
+                        <input type='text' ng-model="ctrl.search" class='form-control' placeholder="search" <span class="glyphicon glyphicon-search pull- right"
+                            aria-hidden="true"></span>
+
+                        <div class="nav navbar-nav navbar-right ">
+                            <li><a href="#">Apply Leave</a></li>
+                        </div>
+                               <div class="nav navbar-nav navbar-right ">
+                            <li><a href="" ui-sref="login">Login Page</a></li>
+                        </div>
+
+                         <div class="nav navbar-nav navbar-right ">
+                            <li><a href="" ui-sref="register">Register Page</a></li>
+                        </div>
+
+                    </div>
+                </div>
+        </nav>
+    </header>
+    <!-- header ends  -->
+    <div class="container ">
+        <ui-view></ui-view>
+    </div>
+
+
+  <!--<select>
+      <option value = "">please select</option>
+      <option> name1 </option>
+      <option> name2 </option>
+      <select>-->
+
+    <!-- libraries  -->
+    <script src="./bower_components/angular/angular.js "></script>
+    <script src="./bower_components/jquery/dist/jquery.js "></script>
+    <script src="./bower_components/bootstrap/dist/js/bootstrap.js "></script>
+    <script src="./bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <!-- custom file -->
+    <script src="index.js"></script>
+
+    <!--directives -->
+    <script src = "./app/directives/forms/form.js"></script>
+    <script src = "./app/directives/myGrid/myGrid.js"></script>
+     <script src = "./app/directives/common/filterDate.js"></script>
+     <!--<script src = "./app/directives/loginPage/login.js"></script>-->
+
+    <!--filter -->
+   
+    <!-- service -->
+
+    <script src = './app/services/dataServices.js'></script>
+    <script src = './app/services/formConfigService.js'></script>
+    <!-- controller -->
+    <script src="app/controllers/home/homeCtrl.js"></script>
+    <script src="app/controllers/leave/leaveCtrl.js"></script>
+    <script src = 'app/controllers/grid/gridCtrl.js'></script>
+    <script src = "./app/controllers/login/loginCtrl.js"></script>
+    <script src = "./app/controllers/registration/registerCtrl.js"></script>
+
+
+
+</html>
